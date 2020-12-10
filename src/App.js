@@ -4,13 +4,21 @@ import './App.css';
 
 function App() {
 
-  async function getPost() {
-    let url = 'https://api.randomuser.me';
-    const res = await fetch(url);
+  async function getPost(blogName, pageNumber) {
+    let url = `https://api.tumblr.com/v2/blog/${blogName}/posts?offset=${pageNumber * 20}`;
+    const headers = {
+      accept: 'application/json;format=camelcase',
+      authorization: 'Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh'
+    }
+    const res = await fetch(url, { headers });
     const data = await res.json();
     console.log(data);
     // return data;
-    getPerson(person = data);
+    if (data.response.posts.length) {
+      getPerson(person = data);
+      // re-enable to get constant fetching
+      // getPost(blogName, pageNumber + 1);
+    }
   }
 
   let [posts, addPost] = useState(['abcd']);
@@ -22,7 +30,8 @@ function App() {
   */
 
   useEffect(() => {
-    getPost();
+    // add blogname here
+    getPost('', 1);
   }, []);
 
   return (
