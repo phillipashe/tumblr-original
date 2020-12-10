@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  let [posts, addPost] = useState(['abcd']);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <header>Tumblr original</header>
+      <body>
+        <label for="blogname">Enter name of blog:</label>
+        <input type="text" id="blogname" name="blogname" />
+        <button onClick={() => addPost(posts = posts.concat(['goodbye world']))}></button>
+        <ul>
+          {posts.map(post => {
+            return <li>{post}</li>;
+          })}
+        </ul>
+      </body>
     </div>
   );
 }
