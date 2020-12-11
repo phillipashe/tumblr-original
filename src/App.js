@@ -10,14 +10,12 @@ function App() {
       return contents.type && contents.type === "image";
     })
     // apparently the first img in the array is unadulterated
-    if (imgObj) 
-    {
-      return imgObj.media[0].url;
-    }
+    if (imgObj) return imgObj.media[0].url;
     return false; 
   }
 
   async function getPost(blogName, pageNumber) {
+    setError(error = false);
     let url;
     url = `https://api.tumblr.com/v2/blog/${blogName}/posts?offset=${pageNumber * 20}`;
     if (!pageNumber) url = `https://api.tumblr.com/v2/blog/${blogName}/posts`;
@@ -29,7 +27,8 @@ function App() {
     const data = await res.json();
     
     if (res.status !== 200) {
-      accessOriginalPosts(originalPosts = 'Not found');
+      // accessOriginalPosts(originalPosts = 'Not found');
+      setError(error = true);
     }
 
     // process data
@@ -47,6 +46,7 @@ function App() {
         }
       }
 
+      // recursively call to continue getting posts
       // re-enable to get constant fetching
       getPost(blogName, pageNumber + 1);
     }
@@ -54,6 +54,7 @@ function App() {
 
   let [originalPosts, accessOriginalPosts] = useState([]);
   let [blogName, setBlogName] = useState('');
+  let [error, setError] = useState(false);
   /*
      need useEffect to prevent infinite calls
      see:
@@ -66,17 +67,22 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <header>Tumblr original</header>
       <body>
-        <label for="blogname">Enter name of blog:</label>
-        <input type="text" 
-        id="blogname" 
-        name="blogname" 
-        value={blogName}
-        onChange={e => setBlogName(e.target.value)}
-        />
-        <button onClick={() => getPost(blogName, 0)}></button>
+      <div>
+      <header>Tumblr Original Blog Search</header>
+        <div className="blog-search-container">
+          <label className="blog-search-label">Enter name of blog:</label>
+          <input className="blog-search"
+          type="text" 
+          id="blogname" 
+          name="blogname" 
+          value={blogName}
+          onChange={e => setBlogName(e.target.value)}
+          />
+        <button type="submit" className="blog-search-submit" onClick={() => getPost(blogName, 0)}>Search!</button>
+        </div>
+        {error && <div className="error">Error!  Blog not found!</div>}
+        <div className="post-container">
           {
           originalPosts.length ? (
           originalPosts.map(post => {
@@ -86,8 +92,9 @@ function App() {
           })
           ) : (null)
           }
-      </body>
+          </div>
     </div>
+      </body>
   );
 }
 
