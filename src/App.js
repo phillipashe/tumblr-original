@@ -18,7 +18,10 @@ function App() {
     setError(error = false);
     let url;
     url = `https://api.tumblr.com/v2/blog/${blogName}/posts?offset=${pageNumber * 20}`;
-    if (!pageNumber) url = `https://api.tumblr.com/v2/blog/${blogName}/posts`;
+    if (!pageNumber) {
+      url = `https://api.tumblr.com/v2/blog/${blogName}/posts`;
+      accessOriginalPosts(originalPosts = []);
+    }
     const headers = {
       accept: 'application/json;format=camelcase',
       authorization: 'Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh'
@@ -29,6 +32,7 @@ function App() {
     if (res.status !== 200) {
       // accessOriginalPosts(originalPosts = 'Not found');
       setError(error = true);
+      accessOriginalPosts(originalPosts = []);
     }
 
     // process data
