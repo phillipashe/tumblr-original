@@ -5,6 +5,18 @@ import './App.css';
 
 function App() {
 
+  function getImageUrl(post) {
+    const imgObj = post.content.find(contents => {
+      return contents.type && contents.type === "image";
+    })
+    // apparently the first img in the array is unadulterated
+    if (imgObj) 
+    {
+      return imgObj.media[0].url;
+    }
+    return false; 
+  }
+
   async function getPost(blogName, pageNumber) {
     let url;
     url = `https://api.tumblr.com/v2/blog/${blogName}/posts?offset=${pageNumber * 20}`;
@@ -20,19 +32,23 @@ function App() {
       accessOriginalPosts(originalPosts = 'Not found');
     }
 
-    // return data;
+    // process data
     if (res.status === 200 && data.response.posts.length) {
       for (let post of data.response.posts) {
+        // no trail === original post
         if (!post.trail.length) {
-          if (post.summary) {
-            const originalPost = `${post.summary} ${post.shortUrl}`;
-            accessOriginalPosts(originalPosts = originalPosts.concat([originalPost]));
+          const imgUrl = getImageUrl(post);
+          const originalPost = {
+            summary: post.summary,
+            shortUrl: post.shortUrl
           }
+          if (imgUrl) originalPost.imgUrl = imgUrl;
+            accessOriginalPosts(originalPosts = originalPosts.concat([originalPost]));
         }
       }
 
       // re-enable to get constant fetching
-      // getPost(blogName, pageNumber + 1);
+      getPost(blogName, pageNumber + 1);
     }
   }
 
@@ -61,13 +77,15 @@ function App() {
         onChange={e => setBlogName(e.target.value)}
         />
         <button onClick={() => getPost(blogName, 0)}></button>
-        {/* <div>{JSON.stringify(person)}</div> */}
-        {/* <div><Post /></div> */}
-        <ul>
-          {originalPosts.map(post => {
-            return <li>{post}</li>;
-          })}
-        </ul>
+          {
+          originalPosts.length ? (
+          originalPosts.map(post => {
+            return <Post summary={post.summary}
+             shortUrl={post.shortUrl}
+             imgUrl={post.imgUrl} />;
+          })
+          ) : (null)
+          }
       </body>
     </div>
   );
