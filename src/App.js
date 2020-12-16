@@ -73,7 +73,12 @@ function App() {
   return (
       <body>
       <div>
-      <header>Tumblr Original Blog Search</header>
+      <div class="form__group field">
+        <input type="input" class="form__field" placeholder="Blog Name" name="name" id='name' onChange={e => setBlogName(e.target.value)} required />
+        <label for="name" class="form__label">Blog Name</label>
+        <button type="submit" className="blog-search-submit" onClick={() => getPost(blogName, 0)}>Search!</button>
+      </div>
+      {/* <header>Tumblr Original Blog Search</header>
         <div className="blog-search-container">
           <label className="blog-search-label">Enter name of blog:</label>
           <input className="blog-search"
@@ -84,7 +89,7 @@ function App() {
           onChange={e => setBlogName(e.target.value)}
           />
         <button type="submit" className="blog-search-submit" onClick={() => getPost(blogName, 0)}>Search!</button>
-        </div>
+        </div> */}
         {error && <div className="error">Error!  Blog not found!</div>}
         <div className="post-container">
           {

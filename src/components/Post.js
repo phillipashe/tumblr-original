@@ -18,7 +18,7 @@ function Post(props) {
     if (props.imgUrl) {
         return (
             <a href={props.shortUrl}>
-                <div className="original-post">
+                <div className="original-post image-height">
                     <img className="original-post-image" src={props.imgUrl} alt='tumblr post preview' />
                 </div>
             </a>
