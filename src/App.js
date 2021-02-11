@@ -65,15 +65,24 @@ function App() {
      https://medium.com/javascript-in-plain-english/react-hooks-how-to-use-useeffect-ecea3e90d84f
   */
 
+ function handleKeyPress(event) {
+  if(event.key === 'Enter') getPost(blogName, 0);
+}
+
   useEffect(() => {
     // add blogname here
     // getPost('', 1);
+    // function onKeyDown(e) {
+    //   if (e.key === 'Enter') getPost(blogName, 0);
+    // }
+    // window.addEventListener('keyDown', onKeyDown);
+    // return () => window.removeEventListener('keyDown', onKeyDown);
   }, []);
 
   return (
       <body>
       <div>
-      <div class="form__group field">
+      <div class="form__group field" onKeyPress={(e) => handleKeyPress(e)}>
         <input type="input" class="form__field" placeholder="Blog Name" name="name" id='name' onChange={e => setBlogName(e.target.value)} required />
         <label for="name" class="form__label">Blog Name</label>
         <button type="submit" className="blog-search-submit" onClick={() => getPost(blogName, 0)}>Search!</button>
