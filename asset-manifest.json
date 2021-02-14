@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tumblr-original/static/css/main.03f2cfb2.chunk.css",
+    "main.js": "/tumblr-original/static/js/main.306ed860.chunk.js",
+    "main.js.map": "/tumblr-original/static/js/main.306ed860.chunk.js.map",
+    "runtime-main.js": "/tumblr-original/static/js/runtime-main.9741d96b.js",
+    "runtime-main.js.map": "/tumblr-original/static/js/runtime-main.9741d96b.js.map",
+    "static/js/2.3b619122.chunk.js": "/tumblr-original/static/js/2.3b619122.chunk.js",
+    "static/js/2.3b619122.chunk.js.map": "/tumblr-original/static/js/2.3b619122.chunk.js.map",
+    "static/js/3.bb1d7635.chunk.js": "/tumblr-original/static/js/3.bb1d7635.chunk.js",
+    "static/js/3.bb1d7635.chunk.js.map": "/tumblr-original/static/js/3.bb1d7635.chunk.js.map",
+    "index.html": "/tumblr-original/index.html",
+    "static/css/main.03f2cfb2.chunk.css.map": "/tumblr-original/static/css/main.03f2cfb2.chunk.css.map",
+    "static/js/2.3b619122.chunk.js.LICENSE.txt": "/tumblr-original/static/js/2.3b619122.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9741d96b.js",
+    "static/js/2.3b619122.chunk.js",
+    "static/css/main.03f2cfb2.chunk.css",
+    "static/js/main.306ed860.chunk.js"
+  ]
+}
