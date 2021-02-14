@@ -25,7 +25,8 @@ body {
 .blog-search-submit {
   background-color: transparent;
   font-family: "Poppins", sans-serif;
-  padding: 1em 22px;
+  /* padding: 1em 22px; */
+  padding: 5px;
   margin-left: 1em;
   color: #9b9b9b;
   border: 2px solid  #9b9b9b; 
@@ -33,15 +34,19 @@ body {
   box-shadow: none;
   border-radius: 0px;
   font-size: 1.3rem;
+  /* max-width: 7vw;
+  max-height: 7vh; */
 }
 
 
 /* new input form here  */
 .form__group {
+  float: left;
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
   margin-left: 3vw;
+  margin-right: 3vw;
   /* width: 50%; */
 }
 
@@ -108,4 +113,19 @@ body {
   min-height: 100vh;
   font-size: 1.5rem;
   background-color: #222222;
+}
+
+.profile-picture {
+  max-width: 5em;
+  max-height: 5em;
+  float: right;
+  margin-right: 3vw;
+  margin-left: 3vw;
+  position: relative;
+}
+
+.error {
+  margin-top: 1em;
+  color: red;
+  font-weight: 700;
 }
